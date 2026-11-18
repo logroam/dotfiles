@@ -41,13 +41,13 @@ Windows 側の WezTerm から読む場合は、Windows の設定ファイル配�
 - マウス操作を有効化
 - vi 風コピーモード
 - ペイン上部にペイン番号・コマンド・現在パスを表示
-- ステータスラインを上部に表示し、Google Calendar / Google Tasks・メモリ・ロードアベレージ・日時を表示
-- Google Calendar は `gcalcli`、Google Tasks は `gtasks` を利用
+- ステータスラインを上部に表示し、Google Calendar・メモリ・ロードアベレージ・日時を表示
+- Google Calendar は `gcalcli` を利用
 - 1日の終わりの確認用に `day-end-check` コマンドを提供
 
-#### Google Calendar / Tasks 連携
+#### Google Calendar 連携
 
-Google 連携の OAuth クライアント情報は git 管理しません。`.zshrc.local.example` を `~/.zshrc.local` にコピーし、Google Cloud Console で作成した OAuth クライアントの値を設定します。
+Google Calendar 連携の OAuth クライアント情報は git 管理しません。`.zshrc.local.example` を `~/.zshrc.local` にコピーし、Google Cloud Console で作成した OAuth クライアントの値を設定します。
 
 ```bash
 cp .zshrc.local.example ~/.zshrc.local
@@ -57,7 +57,6 @@ $EDITOR ~/.zshrc.local
 必要な API:
 
 - Google Calendar API
-- Google Tasks API
 
 設定後、認証フローを実行します。
 
@@ -65,10 +64,10 @@ $EDITOR ~/.zshrc.local
 setup-google-oauth
 ```
 
-ブラウザで Google ログインを完了すると、tmux のステータスラインに予定とタスクが表示されます。認証後に表示が古い場合はキャッシュを削除します。
+ブラウザで Google ログインを完了すると、tmux のステータスラインに予定が表示されます。認証後に表示が古い場合はキャッシュを削除します。
 
 ```bash
-rm -f ~/.cache/tmux/google-status
+rm -f ~/.cache/tmux/google-calendar-status
 ```
 
 ## WezTerm

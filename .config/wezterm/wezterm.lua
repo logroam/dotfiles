@@ -123,6 +123,10 @@ local keys = {
     -- コピーモード (tmux風)
     { key = "[", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 
+    -- フォントサイズ
+    { key = "=", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
+    { key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
+
     -- その他
     { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b\r") },
 

@@ -3,8 +3,8 @@
 set -u
 
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/tmux"
-cache_file="$cache_dir/google-status"
-lock_dir="$cache_dir/google-status.lock"
+cache_file="$cache_dir/google-calendar-status"
+lock_dir="$cache_dir/google-calendar-status.lock"
 ttl_seconds="${TMUX_GOOGLE_STATUS_TTL:-300}"
 
 shorten() {
@@ -50,60 +50,9 @@ calendar_status() {
   fi
 }
 
-todo_status() {
-  if ! command -v gtasks >/dev/null 2>&1; then
-    printf "Todo: setup"
-    return
-  fi
-
-  json=$(gtasks tasks view --format json --sort due --max 5 </dev/null 2>/dev/null) || {
-    printf "Todo: login"
-    return
-  }
-
-  summary=$(
-    printf "%s" "$json" |
-      /usr/bin/ruby -rjson -e '
-        begin
-          raw = STDIN.read
-          data = JSON.parse(raw)
-          tasks =
-            if data.is_a?(Array)
-              data
-            elsif data.is_a?(Hash)
-              data["tasks"] || data["items"] || data["data"] || []
-            else
-              []
-            end
-
-          pending = tasks.reject do |task|
-            status = task["status"].to_s.downcase
-            completed = task["completed"]
-            status.include?("completed") || completed
-          end
-
-          if pending.empty?
-            puts "none"
-          else
-            title = pending.first["title"].to_s.gsub(/\s+/, " ").strip
-            title = "(untitled)" if title.empty?
-            title = title[0, 35] + "~" if title.length > 36
-            rest = pending.length - 1
-            puts rest.positive? ? "#{pending.length}: #{title}" : title
-          end
-        rescue
-          puts "login"
-        end
-      '
-  )
-
-  printf "Todo: %s" "$summary"
-}
-
 build_status() {
-  cal=$(calendar_status)
-  todo=$(todo_status)
-  printf "%s | %s\n" "$cal" "$todo"
+  calendar_status
+  printf "\n"
 }
 
 refresh_cache() {
