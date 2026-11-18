@@ -1,7 +1,6 @@
 brew "bat"
 brew "eza"
 brew "fzf"
-brew "gcalcli"
 brew "gh"
 brew "neovim"
 brew "node"

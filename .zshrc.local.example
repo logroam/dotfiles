@@ -1,12 +1,6 @@
 # Copy this file to ~/.zshrc.local and fill in values that should not be
 # committed to git.
 
-# Google OAuth client for gcalcli.
-# Create an OAuth client in Google Cloud Console with the Google Calendar API
-# enabled.
-export GCALCLI_CLIENT_ID=""
-export GCALCLI_CLIENT_SECRET=""
-
 # Directories checked by day-end-check.
 # Use colon-separated paths. Only these directories are inspected.
 export DAY_END_REPOS="$HOME/dotfiles"

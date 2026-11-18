@@ -39,7 +39,6 @@ Brewfile.local
 .aws/
 .config/gcloud/
 .config/gh/
-.config/gtasks/
 .config/github-copilot/
 .config/karabiner/automatic_backups/
 .config/karabiner/backups/
